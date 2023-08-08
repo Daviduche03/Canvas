@@ -79,8 +79,8 @@
 
         // Apply border radius to the attached image
         const radius = 50;
-        const attachedWidth = 100;
-        const attachedHeight = 120;
+        const attachedWidth = 110;
+        const attachedHeight = 100;
 
         // Draw the attached image on top of the card image with border radius
         ctx.save();
@@ -91,8 +91,8 @@
         ctx.clip();
         ctx.drawImage(
           attachedImage,
-          canvas.width - 90,
-          canvas.height - 205,
+          canvas.width - 100,
+          canvas.height - 215,
           attachedWidth,
           attachedHeight
         );
