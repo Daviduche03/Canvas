@@ -78,13 +78,13 @@
       ctx.drawImage(cardImage, 0, 0, canvas.width, canvas.height); // Set the width of the card image to 20rem, and height to match the card's height
 
       // Apply border radius to the attached image
-      const radius = 100;
+      const radius = 50;
       const attachedWidth = 75;
       const attachedHeight = 80;
       ctx.save();
       ctx.beginPath();
       ctx.moveTo(canvas.width - 90 + radius, canvas.height - 190);
-      ctx.arc(canvas.width - 90 + radius, canvas.height - 190, radius, 0, 2 * Math.PI);
+      ctx.circle(canvas.width - 90 + radius, canvas.height - 190, radius, 0, 2 * Math.PI);
       ctx.closePath();
       ctx.clip();
 
