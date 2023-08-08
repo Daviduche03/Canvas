@@ -77,8 +77,21 @@
       // Draw the card image
       ctx.drawImage(cardImage, 0, 0, canvas.width, canvas.height); // Set the width of the card image to 20rem, and height to match the card's height
 
-      // Draw the attached image on top of the card image
-      ctx.drawImage(attachedImage, canvas.width - 90, canvas.height - 190, 75, 80); // Set the size of the attached image to 70x70 and position at the bottom right corner
+      // Apply border radius to the attached image
+      const radius = 100;
+      const attachedWidth = 75;
+      const attachedHeight = 80;
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(canvas.width - 90 + radius, canvas.height - 190);
+      ctx.arc(canvas.width - 90 + radius, canvas.height - 190, radius, 0, 2 * Math.PI);
+      ctx.closePath();
+      ctx.clip();
+
+      // Draw the attached image on top of the card image with border radius
+      ctx.drawImage(attachedImage, canvas.width - 90, canvas.height - 190, attachedWidth, attachedHeight);
+
+      ctx.restore();
 
       // Convert the canvas to a Blob
       canvas.toBlob(function(blob) {
