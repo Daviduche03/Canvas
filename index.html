@@ -75,7 +75,8 @@
         const ctx = canvas.getContext("2d");
 
         // Draw the card image
-        ctx.drawImage(cardImage, 0, 0, 20 * 16, 20 * 16); // Set the size of the card image to 20rem x 20rem
+        ctx.drawImage(cardImage, 0, 0, 20 * 16, canvas.height); // Set the width of the card image to 20rem, and height to match the card's height
+
 
 
         // Draw the attached image on top of the card image
