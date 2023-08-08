@@ -9,8 +9,8 @@
       .card-container {
         position: relative;
         display: inline-block;
-        width: 100%;
-        height: 100%;
+        width: 20rem;
+        height: 20rem;
       }
 
       /* Style the container for the attached image */
@@ -33,7 +33,7 @@
     <a id="" href="untitled.html">next</a>
     <div class="card-container">
       <!-- Replace "card.jpg" with the path to your card image -->
-      <img src="card.jpg" alt="Card Image" width="200" height="200"/>
+      <img src="card.jpg" alt="Card Image" width="100%"/>
 
       <!-- Replace "attached.jpg" with the path to the image you want to attach -->
       <div class="attached-image-container">
@@ -75,7 +75,8 @@
         const ctx = canvas.getContext("2d");
 
         // Draw the card image
-        ctx.drawImage(cardImage, 0, 0);
+        ctx.drawImage(cardImage, 0, 0, 20 * 16, 20 * 16); // Set the size of the card image to 20rem x 20rem
+
 
         // Draw the attached image on top of the card image
         ctx.drawImage(attachedImage, 0, 0, 70, 70); // Set the size of the attached image to 50x50
