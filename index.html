@@ -76,7 +76,7 @@
       ctx.drawImage(cardImage, 0, 0, canvas.width, canvas.height); // Set the width of the card image to 20rem, and height to match the card's height
 
       // Draw the attached image on top of the card image
-      ctx.drawImage(attachedImage, canvas.width - 70, canvas.height - 70, 70, 70); // Set the size of the attached image to 70x70 and position at the bottom right corner
+      ctx.drawImage(attachedImage, canvas.width - 70, canvas.height - 40, 70, 70); // Set the size of the attached image to 70x70 and position at the bottom right corner
 
       // Convert the canvas to a Blob
       canvas.toBlob(function(blob) {
