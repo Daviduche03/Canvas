@@ -21,10 +21,24 @@
         z-index: 1;
       }
 
+      #input {
+        cursor: pointer;
+        border: 0;
+        padding: 10px;
+        border-radius: 0.3rem;
+        background: black;
+        color: white;
+      }
+
       /* Style the download button */
       #download-btn {
         margin-top: 10px;
         cursor: pointer;
+        border: 0;
+        padding: 10px;
+        border-radius: 0.3rem;
+        background: black;
+        color: white;
       }
     </style>
   </head>
@@ -37,7 +51,12 @@
 
       <!-- Replace "attached.jpg" with the path to the image you want to attach -->
       <div class="attached-image-container">
-        <input type="file" accept="image/*" onchange="previewImage(event)" />
+        <input
+          type="file"
+          accept="image/*"
+          onchange="previewImage(event)"
+          id="input"
+        />
         <img
           src="#"
           alt="Attached Image"
@@ -53,13 +72,22 @@
     <button id="download-btn" onclick="mergeImages()">
       Download Combined Image
     </button>
+    <button id="download-btn" onclick="refresh()">Refresh</button>
 
     <script>
       // Function to preview the selected attached image
+      const input = document.getElementById("input");
+      const attachedImage = document.getElementById("att");
       function previewImage(event) {
-        const attachedImage = document.getElementById("att");
+        input.style.display = "block";
         attachedImage.style.display = "block";
         attachedImage.src = URL.createObjectURL(event.target.files[0]);
+        input.style.display = "none";
+      }
+
+      function refresh() {
+        input.style.display = "block";
+        attachedImage.src = "";
       }
 
       // Function to merge the card and attached images
@@ -78,16 +106,19 @@
         ctx.drawImage(cardImage, 0, 0, canvas.width, canvas.height); // Set the width of the card image to 20rem, and height to match the card's height
 
         // Apply border radius to the attached image
-        
+
         const attachedWidth = 110;
         const attachedHeight = 110;
 
         // Draw the attached image on top of the card image with border radius
         ctx.save();
-        roundedImage(canvas.width - 90,
+        roundedImage(
+          canvas.width - 90,
           canvas.height - 215,
           attachedWidth,
-          attachedHeight, 60);
+          attachedHeight,
+          60
+        );
         ctx.clip();
         ctx.drawImage(
           attachedImage,
