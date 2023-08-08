@@ -78,16 +78,16 @@
         ctx.drawImage(cardImage, 0, 0, canvas.width, canvas.height); // Set the width of the card image to 20rem, and height to match the card's height
 
         // Apply border radius to the attached image
-        const radius = 50;
+        
         const attachedWidth = 110;
-        const attachedHeight = 100;
+        const attachedHeight = 110;
 
         // Draw the attached image on top of the card image with border radius
         ctx.save();
         roundedImage(canvas.width - 90,
           canvas.height - 215,
           attachedWidth,
-          attachedHeight, 50);
+          attachedHeight, 60);
         ctx.clip();
         ctx.drawImage(
           attachedImage,
