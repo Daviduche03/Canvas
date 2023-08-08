@@ -1,98 +1,94 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Card Image with Attached Image</title>
-    <style>
-      /* Style the container for the card image */
-      .card-container {
-        position: relative;
-        display: inline-block;
-        width: 20rem;
-        height: 20rem;
-      }
+<head>
+  <title>Card Image with Attached Image</title>
+  <style>
+    /* Style the container for the card image */
+    .card-container {
+      position: relative;
+      display: inline-block;
+      width: 20rem;
+      height: 20rem;
+    }
 
-      /* Style the container for the attached image */
-      .attached-image-container {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        z-index: 1;
-      }
+    /* Style the container for the attached image */
+    .attached-image-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1;
+    }
 
-      /* Style the download button */
-      #download-btn {
-        margin-top: 10px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Card Image with Attached Image</h1>
-    <a id="" href="untitled.html">next</a>
-    <div class="card-container">
-      <!-- Replace "card.jpg" with the path to your card image -->
-      <img src="card.jpg" alt="Card Image" width="100%"/>
+    /* Style the download button */
+    #download-btn {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Card Image with Attached Image</h1>
+  <a id="" href="untitled.html">next</a>
+  <div class="card-container">
+    <!-- Replace "card.jpg" with the path to your card image -->
+    <img src="card.jpg" alt="Card Image" width="100%"/>
 
-      <!-- Replace "attached.jpg" with the path to the image you want to attach -->
-      <div class="attached-image-container">
-        <input type="file" accept="image/*" onchange="previewImage(event)" />
-        <img
-          src="#"
-          alt="Attached Image"
-          width="100"
-          height="100"
-          id="att"
-          style="display: none"
-        />
-      </div>
+    <!-- Replace "attached.jpg" with the path to the image you want to attach -->
+    <div class="attached-image-container">
+      <input type="file" accept="image/*" onchange="previewImage(event)" />
+      <img
+        src="#"
+        alt="Attached Image"
+        width="100"
+        height="100"
+        id="att"
+        style="display: none"
+      />
     </div>
+  </div>
 
-    <!-- Add a button to trigger the image download -->
-    <button id="download-btn" onclick="mergeImages()">
-      Download Combined Image
-    </button>
+  <!-- Add a button to trigger the image download -->
+  <button id="download-btn" onclick="mergeImages()">
+    Download Combined Image
+  </button>
 
-    <script>
-      // Function to preview the selected attached image
-      function previewImage(event) {
-        const attachedImage = document.getElementById("att");
-        attachedImage.style.display = "block";
-        attachedImage.src = URL.createObjectURL(event.target.files[0]);
-      }
+  <script>
+    // Function to preview the selected attached image
+    function previewImage(event) {
+      const attachedImage = document.getElementById("att");
+      attachedImage.style.display = "block";
+      attachedImage.src = URL.createObjectURL(event.target.files[0]);
+    }
 
-      // Function to merge the card and attached images
-      function mergeImages() {
-        const cardImage = document.querySelector(".card-container img");
-        const attachedImage = document.getElementById("att");
+    // Function to merge the card and attached images
+    function mergeImages() {
+      const cardImage = document.querySelector(".card-container img");
+      const attachedImage = document.getElementById("att");
 
-        // Create a new canvas to draw the merged image
-        const canvas = document.createElement("canvas");
-        canvas.width = cardImage.width;
-        canvas.height = cardImage.height;
+      // Create a new canvas to draw the merged image
+      const canvas = document.createElement("canvas");
+      canvas.width = cardImage.width;
+      canvas.height = cardImage.height;
 
-        const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d");
 
-        // Draw the card image
-        ctx.drawImage(cardImage, 0, 0, canvas.width, canvas.height); // Set the width of the card image to 20rem, and height to match the card's height
+      // Draw the card image
+      ctx.drawImage(cardImage, 0, 0, canvas.width, canvas.height); // Set the width of the card image to 20rem, and height to match the card's height
 
+      // Draw the attached image on top of the card image
+      ctx.drawImage(attachedImage, canvas.width - 70, canvas.height - 70, 70, 70); // Set the size of the attached image to 70x70 and position at the bottom right corner
 
-
-        // Draw the attached image on top of the card image
-        ctx.drawImage(attachedImage, 0, 0, 70, 70); // Set the size of the attached image to 50x50
-
-        // Convert the canvas to a data URL (PNG format)
-        const dataURL = canvas.toDataURL();
-
+      // Convert the canvas to a Blob
+      canvas.toBlob(function(blob) {
         // Create a link to download the image
         const downloadLink = document.createElement("a");
-        downloadLink.href = dataURL;
+        downloadLink.href = URL.createObjectURL(blob);
         downloadLink.download = "combined_image.png";
 
         // Simulate a click on the link to trigger the download
         downloadLink.click();
-      }
-    </script>
-  </body>
+      }, "image/png");
+    }
+  </script>
+</body>
 </html>
