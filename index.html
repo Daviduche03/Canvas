@@ -84,7 +84,10 @@
 
         // Draw the attached image on top of the card image with border radius
         ctx.save();
-        roundedImage(10, 10, 102, 77, 10);
+        roundedImage(canvas.width - 90,
+          canvas.height - 205,
+          attachedWidth,
+          attachedHeight, 10);
         ctx.clip();
         ctx.drawImage(
           attachedImage,
